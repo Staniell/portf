@@ -135,11 +135,14 @@ export function PortfolioComponent() {
                 both front-end and back-end technologies, I bring ideas to life through code.
               </p>
               <div className="flex justify-center space-x-4">
-                <Button>
+                <Button onClick={() => window.open("mailto:giostaniell12@gmail.com", "_blank")}>
                   <Mail className="mr-2 h-4 w-4" /> Contact Me
                 </Button>
-                <Button variant="outline">
-                  <Github className="mr-2 h-4 w-4" /> GitHub
+                <Button
+                  variant="outline"
+                  onClick={() => window.open("https://github.com/Staniell", "_blank", "noopener,noreferrer")}
+                >
+                  <Github href="https://github.com/Staniell" className="mr-2 h-4 w-4" /> GitHub
                 </Button>
               </div>
             </div>
@@ -267,13 +270,28 @@ export function PortfolioComponent() {
         <footer className="py-8 bg-muted">
           <div className="container mx-auto px-4 text-center">
             <div className="flex justify-center space-x-4 mb-4">
-              <Button variant="ghost" size="icon">
-                <Github className="h-5 w-5" />
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => window.open("https://github.com/Staniell", "_blank", "noopener,noreferrer")}
+              >
+                <Github href="https://github.com/Staniell" className="h-5 w-5" />
               </Button>
-              <Button variant="ghost" size="icon">
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() =>
+                  window.open("https://www.linkedin.com/in/gio-staniell-belolo/", "_blank", "noopener,noreferrer")
+                }
+              >
                 <Linkedin className="h-5 w-5" />
               </Button>
-              <Button variant="ghost" size="icon">
+
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => window.open("mailto:giostaniell12@gmail.com", "_blank")}
+              >
                 <Mail className="h-5 w-5" />
               </Button>
             </div>
