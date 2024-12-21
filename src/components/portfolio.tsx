@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -20,6 +20,9 @@ import {
   GitBranch,
   Briefcase,
 } from "lucide-react";
+import emailjs from "@emailjs/browser";
+import envVar from "@/lib/environment";
+import { useToast } from "@/hooks/use-toast";
 
 const TimelineItem = ({ year, title, company, description, left }: any) => (
   <div className="mb-8 flex justify-between items-center w-full">
@@ -55,6 +58,30 @@ const TimelineItem = ({ year, title, company, description, left }: any) => (
 export function PortfolioComponent() {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const form = useRef<any>();
+  const { toast } = useToast();
+
+  const sendEmail = (e: any) => {
+    e.preventDefault();
+
+    emailjs.sendForm(envVar.emailJSServiceId, envVar.emailJSTemplateId, form.current, envVar.emailJSPubId).then(
+      (result) => {
+        toast({
+          title: "Your message has been sent!",
+          description: "Expect a response within 24 hours.",
+        });
+      },
+      (error) => {
+        toast({
+          title: "Error sending message",
+          description: "Please try again later.",
+        });
+      }
+    );
+
+    e.target.reset();
+  };
 
   const toggleDarkMode = () => {
     setIsDarkMode(!isDarkMode);
@@ -252,10 +279,10 @@ export function PortfolioComponent() {
                   <CardDescription>Fill out the form below to send me a message.</CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <form className="space-y-4">
-                    <Input placeholder="Your Name" />
-                    <Input type="email" placeholder="Your Email" />
-                    <Textarea placeholder="Your Message" />
+                  <form ref={form} onSubmit={sendEmail} className="space-y-4">
+                    <Input required name="user_email" placeholder="Your Email" />
+                    <Input required name="user_subject" placeholder="Subject" />
+                    <Textarea required name="user_message" placeholder="Your Message" />
                     <Button type="submit" className="w-full">
                       Send Message
                     </Button>
@@ -295,7 +322,7 @@ export function PortfolioComponent() {
                 <Mail className="h-5 w-5" />
               </Button>
             </div>
-            <p>&copy; 2023 Gio Staniell Belolo. All rights reserved.</p>
+            <p>&copy; 2025 Gio Staniell Belolo. All rights reserved.</p>
           </div>
         </footer>
       </div>
