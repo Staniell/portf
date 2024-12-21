@@ -65,12 +65,31 @@ export function PortfolioComponent() {
   const sendEmail = (e: any) => {
     e.preventDefault();
 
+    // Get the current timestamp
+    const currentTime = new Date().getTime();
+
+    // Retrieve the last email-sending time from localStorage
+    const lastEmailTime = parseInt(localStorage.getItem("lastEmailTime") || "0", 10);
+
+    // Check if 5 minutes (300000 ms) have passed since the last email
+    if (currentTime - lastEmailTime < 300000) {
+      toast({
+        title: "Rate limit exceeded",
+        description: "You can send another message after 5 minutes.",
+      });
+      return;
+    }
+
+    // If rate limit is not exceeded, proceed to send email
     emailjs.sendForm(envVar.emailJSServiceId, envVar.emailJSTemplateId, form.current, envVar.emailJSPubId).then(
       (result) => {
         toast({
           title: "Your message has been sent!",
           description: "Expect a response within 24 hours.",
         });
+
+        // Store the current timestamp as the last email-sending time
+        localStorage.setItem("lastEmailTime", currentTime.toString());
       },
       (error) => {
         toast({
