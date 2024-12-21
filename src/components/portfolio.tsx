@@ -25,14 +25,14 @@ import envVar from "@/lib/environment";
 import { useToast } from "@/hooks/use-toast";
 
 const TimelineItem = ({ year, title, company, description, left }: any) => (
-  <div className="mb-8 flex justify-between items-center w-full">
+  <div className="mb-8 flex-col gap-y-2 lg:flex-row flex justify-between items-center w-full">
     {!left ? (
       <>
-        <div className="order-1 w-5/12"></div>
+        <div className="lg:order-1 lg:w-5/12"></div>
         <div className="z-20 flex items-center order-1 bg-primary shadow-xl p-3 rounded-full">
           <h1 className="mx-auto font-semibold text-base text-primary-foreground">{year}</h1>
         </div>
-        <div className="order-1 bg-card rounded-lg shadow-xl w-5/12 px-6 py-4 border-2">
+        <div className="lg:order-1 order-2 bg-card rounded-lg shadow-xl lg:w-5/12 px-6 py-4 border-2">
           <h3 className="mb-3 font-bold text-primary text-xl">{title}</h3>
           <h4 className="mb-3 font-semibold text-sm text-muted-foreground">{company}</h4>
           <p className="text-sm leading-snug tracking-wide text-card-foreground text-opacity-100">{description}</p>
@@ -40,16 +40,16 @@ const TimelineItem = ({ year, title, company, description, left }: any) => (
       </>
     ) : (
       <>
-        <div className="order-1 bg-card rounded-lg shadow-xl w-5/12 px-6 py-4 border-2">
+        <div className="lg:order-1 order-2 bg-card rounded-lg shadow-xl lg:w-5/12 px-6 py-4 border-2">
           <h3 className="mb-3 font-bold text-primary text-xl">{title}</h3>
           <h4 className="mb-3 font-semibold text-sm text-muted-foreground">{company}</h4>
           <p className="text-sm leading-snug tracking-wide text-card-foreground text-opacity-100">{description}</p>
         </div>
-        <div className="z-20 flex items-center order-1 bg-primary shadow-xl p-3 rounded-full">
+        <div className="z-20 flex items-center lg:order-1 bg-primary shadow-xl p-3 rounded-full">
           <h1 className="mx-auto font-semibold text-base text-primary-foreground">{year}</h1>
         </div>
 
-        <div className="order-1 w-5/12"></div>
+        <div className="lg:order-1 w-5/12"></div>
       </>
     )}
   </div>
@@ -197,9 +197,9 @@ export function PortfolioComponent() {
           {/* Experience Section */}
           <section id="experience" className="py-20">
             <div className="container mx-auto px-4">
-              <h2 className="text-3xl font-bold mb-8 text-center">Work Experience</h2>
-              <div className="relative wrap overflow-hidden p-10 h-full">
-                <div className="border-2-2 absolute border-opacity-20 border-primary h-full border left-1/2"></div>
+              <h2 className="text-3xl font-bold mb-4 lg:mb-8 text-center">Work Experience</h2>
+              <div className="relative wrap overflow-hidden px-10 py-4 lg:p-10 h-full">
+                <div className="hidden lg:block border-2-2 absolute border-opacity-20 border-primary h-full border left-1/2"></div>
                 <TimelineItem
                   year="2023 - Present"
                   title="Full-Stack Developer"
